@@ -1,121 +1,122 @@
 <!DOCTYPE html>
-border-radius:50%;
-position:fixed;pointer-events:none;
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chachuz</title>
+
+
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Inter,system-ui,sans-serif;
+background:#000;
+color:#fff;
+overflow:hidden;
+}
+
+
+/* Background Video */
+video{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+object-fit:cover;
+filter:brightness(0.45);
+z-index:-2;
+}
+
+
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.55);
+z-index:-1;
+}
+
+
+/* Center Card */
+.card{
+position:absolute;
+top:50%;left:50%;
 transform:translate(-50%,-50%);
-transition:transform .08s ease
+width:92%;max-width:420px;
+background:rgba(20,20,30,0.65);
+backdrop-filter:blur(18px);
+border-radius:18px;
+padding:2.2rem;
+text-align:center;
+box-shadow:0 0 50px rgba(0,0,0,0.8);
+animation:fadeIn 1.2s ease;
 }
 
 
-</head>
-<body>
-<div class="cursor"></div>
-
-
-<!-- Background Anime Edit Video -->
-<video class="bg-video" autoplay muted loop>
-<source src="anime-edit.mp4" type="video/mp4">
-</video>
-
-
-<div class="overlay"></div>
-
-
-<!-- Background Music -->
-<audio id="bgm" loop>
-<source src="music.mp3" type="audio/mpeg">
-</audio>
-
-
-<button class="music-btn" onclick="toggleMusic()">▶ Music</button>
-
-
-<div class="container">
-<div class="glass">
-<h1>Chachuz</h1>
-<p class="subtitle">Editor • Graphic Designer • Team Leader</p>
-
-
-<section>
-<h2>About</h2>
-<p>
-I am a professional editor and graphic designer focused on clean visuals,
-disciplined workflow, and team-driven growth. As the lead of <strong>Team Feliz</strong>,
-I influence direction, standards, and mindset — ensuring consistent improvement
-without compromising quality.
-</p>
-</section>
-
-
-<section>
-<h2>Expertise</h2>
-<div class="tags">
-<span class="tag">Video Editing</span>
-<span class="tag">Graphic Design</span>
-<span class="tag">Creative Direction</span>
-<span class="tag">Community Leadership</span>
-</div>
-</section>
-
-
-<section>
-<h2>Contact</h2>
-<ul>
-<li>Instagram: <a href="https://instagram.com/_samridh_chachu_z_" target="_blank">@_samridh_chachu_z_</a></li>
-<li>Discord: theonechachuz</li>
-<li>WhatsApp Only: +91 80893 22508</li>
-</ul>
-</section>
-
-
-<section>
-<h2>Team Feliz</h2>
-<p>
-Team Feliz is a structured creative community built on respect, discipline,
-and long-term growth. My role is to guide its vision, mentor members, and
-maintain professional standards across all projects.
-</p>
-<p style="margin-top:.8rem">🔗 <a href="#">Discord Server Link</a></p>
-</section>
-
-
-<footer>
-© 2026 Chachuz • Professional Portfolio
-</footer>
-</div>
-</div>
-
-
-<script>
-const music = document.getElementById('bgm');
-const btn = document.querySelector('.music-btn');
-let playing = false;
-function toggleMusic(){
-if(!playing){ music.play(); btn.textContent='⏸ Music'; }
-else{ music.pause(); btn.textContent='▶ Music'; }
-playing = !playing;
+@keyframes fadeIn{
+from{opacity:0;transform:translate(-50%,-45%)}
+to{opacity:1;transform:translate(-50%,-50%)}
 }
-// Custom Cursor
-const cursor = document.querySelector('.cursor');
-window.addEventListener('mousemove', e =>{
-cursor.style.left = e.clientX + 'px';
-cursor.style.top = e.clientY + 'px';
-});
 
 
-// Scroll reveal
-const sections = document.querySelectorAll('section');
-const reveal = () =>{
-const trigger = window.innerHeight * 0.85;
-sections.forEach(sec =>{
-const top = sec.getBoundingClientRect().top;
-if(top < trigger) sec.style.opacity = 1;
-else sec.style.opacity = 0.2;
-});
+.avatar{
+width:110px;height:110px;
+border-radius:50%;
+margin:auto;
+background:url('avatar.jpg') center/cover no-repeat;
+border:3px solid #4cc9f0;
+box-shadow:0 0 20px #4cc9f055;
 }
-window.addEventListener('scroll', reveal);
-reveal();
-</script>
 
 
-</body>
+h1{margin-top:1rem;font-size:2rem;font-weight:700}
+.role{opacity:.8;margin-top:.3rem;font-size:.95rem}
+
+
+.links{
+display:flex;
+justify-content:center;
+gap:1rem;
+margin:1.4rem 0;
+}
+
+
+.links a{
+width:44px;height:44px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+background:rgba(255,255,255,0.08);
+color:#fff;
+transition:.25s ease;
+}
+
+
+.links a:hover{
+background:#4cc9f0;
+color:#000;
+transform:translateY(-4px);
+}
+
+
+.about{
+font-size:.9rem;
+opacity:.85;
+line-height:1.6;
+}
+
+
+.team{
+margin-top:1rem;
+font-size:.9rem;
+}
+
+
+.team a{color:#4cc9f0;text-decoration:none}
+
+
 </html>
