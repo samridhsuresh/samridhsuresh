@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+display:inline-block;
+background:rgba(255,255,255,0.08);
+padding:.35rem .75rem;
+border-radius:20px;
+font-size:.85rem;
+margin:.2rem
+}
+
+
+a{color:#4cc9f0;text-decoration:none}
+a:hover{text-decoration:underline}
+
+
+ul{list-style:none}
+li{margin:.4rem 0}
+
+
+footer{
+margin-top:2.5rem;
+text-align:center;
+font-size:.85rem;
+opacity:.6
+}
+
+
+/* Music Button */
+.music-btn{
+position:fixed;
+bottom:20px;right:20px;
+background:rgba(0,0,0,0.6);
+border:1px solid rgba(255,255,255,0.2);
+color:#fff;
+padding:.6rem 1rem;
+border-radius:30px;
+cursor:pointer;
+font-size:.85rem
+}
+</style>
+</head>
+<body>
+
+
+<!-- Background Anime Edit Video -->
+<video class="bg-video" autoplay muted loop>
+<source src="anime-edit.mp4" type="video/mp4">
+</video>
+
+
+<div class="overlay"></div>
+
+
+<!-- Background Music -->
+<audio id="bgm" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+
+<button class="music-btn" onclick="toggleMusic()">▶ Music</button>
+
+
+<div class="container">
+<div class="glass">
+<h1>Chachuz</h1>
+<p class="subtitle">Editor • Graphic Designer • Team Leader</p>
+
+
+<section>
+<h2>About</h2>
+<p>
+I am a professional editor and graphic designer focused on clean visuals,
+disciplined workflow, and team-driven growth. As the lead of <strong>Team Feliz</strong>,
+I influence direction, standards, and mindset — ensuring consistent improvement
+without compromising quality.
+</p>
+</section>
+
+
+<section>
+<h2>Expertise</h2>
+<div class="tags">
+<span class="tag">Video Editing</span>
+<span class="tag">Graphic Design</span>
+<span class="tag">Creative Direction</span>
+<span class="tag">Community Leadership</span>
+</div>
+</section>
+
+
+<section>
+<h2>Contact</h2>
+<ul>
+<li>Instagram: <a href="https://instagram.com/_samridh_chachu_z_" target="_blank">@_samridh_chachu_z_</a></li>
+<li>Discord: theonechachuz</li>
+<li>WhatsApp Only: +91 80893 22508</li>
+</ul>
+</section>
+
+
+<section>
+<h2>Team Feliz</h2>
+<p>
+Team Feliz is a structured creative community built on respect, discipline,
+and long-term growth. My role is to guide its vision, mentor members, and
+maintain professional standards across all projects.
+</p>
+<p style="margin-top:.8rem">🔗 <a href="#">Discord Server Link</a></p>
+</section>
+
+
+<footer>
+© 2026 Chachuz • Professional Portfolio
+</footer>
+</div>
+</div>
+
+
+<script>
+const music = document.getElementById('bgm');
+const btn = document.querySelector('.music-btn');
+let playing = false;
+function toggleMusic(){
+if(!playing){ music.play(); btn.textContent='⏸ Music'; }
+else{ music.pause(); btn.textContent='▶ Music'; }
+playing = !playing;
+}
+</script>
+
+
+</body>
+</html>
