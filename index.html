@@ -1,44 +1,14 @@
 <!DOCTYPE html>
-display:inline-block;
-background:rgba(255,255,255,0.08);
-padding:.35rem .75rem;
-border-radius:20px;
-font-size:.85rem;
-margin:.2rem
+border-radius:50%;
+position:fixed;pointer-events:none;
+transform:translate(-50%,-50%);
+transition:transform .08s ease
 }
 
 
-a{color:#4cc9f0;text-decoration:none}
-a:hover{text-decoration:underline}
-
-
-ul{list-style:none}
-li{margin:.4rem 0}
-
-
-footer{
-margin-top:2.5rem;
-text-align:center;
-font-size:.85rem;
-opacity:.6
-}
-
-
-/* Music Button */
-.music-btn{
-position:fixed;
-bottom:20px;right:20px;
-background:rgba(0,0,0,0.6);
-border:1px solid rgba(255,255,255,0.2);
-color:#fff;
-padding:.6rem 1rem;
-border-radius:30px;
-cursor:pointer;
-font-size:.85rem
-}
-</style>
 </head>
 <body>
+<div class="cursor"></div>
 
 
 <!-- Background Anime Edit Video -->
@@ -124,6 +94,26 @@ if(!playing){ music.play(); btn.textContent='⏸ Music'; }
 else{ music.pause(); btn.textContent='▶ Music'; }
 playing = !playing;
 }
+// Custom Cursor
+const cursor = document.querySelector('.cursor');
+window.addEventListener('mousemove', e =>{
+cursor.style.left = e.clientX + 'px';
+cursor.style.top = e.clientY + 'px';
+});
+
+
+// Scroll reveal
+const sections = document.querySelectorAll('section');
+const reveal = () =>{
+const trigger = window.innerHeight * 0.85;
+sections.forEach(sec =>{
+const top = sec.getBoundingClientRect().top;
+if(top < trigger) sec.style.opacity = 1;
+else sec.style.opacity = 0.2;
+});
+}
+window.addEventListener('scroll', reveal);
+reveal();
 </script>
 
 
