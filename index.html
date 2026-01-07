@@ -1,375 +1,898 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chachuz | Editor • Designer • Leader</title>
-    <meta name="description" content="Chachuz - Disciplined editor, graphic designer, and Team Feliz leader.">
-    <meta name="author" content="Chachuz">
-    <meta name="theme-color" content="#00d4ff">
-    <meta property="og:title" content="Chachuz | Editor • Designer • Leader">
-    <meta property="og:description" content="Creative director and leader of Team Feliz.">
-    <meta property="og:type" content="website">
+    <meta name="description" content="Chachuz - Disciplined editor, graphic designer, and Team Feliz leader. Creative direction, high standards, and community growth." />
+    <meta name="author" content="Chachuz" />
+    <meta name="theme-color" content="#ff0000" />
+
+    <meta property="og:title" content="Chachuz | Editor • Designer • Leader" />
+    <meta property="og:description" content="Creative director and leader of Team Feliz. Excellence in editing and graphic design." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@chachuz" />
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        outfit: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        background: '#0a0a0a',
-                        foreground: '#fafafa',
-                        primary: '#f03a17',
-                        secondary: '#1a1a1a',
-                        muted: '#737373',
-                        border: '#262626',
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards',
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
-                        'spin-slow': 'spin 20s linear infinite',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            'from': { opacity: '0', transform: 'translateY(30px)' },
-                            'to': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        },
-                        pulseGlow: {
-                            '0%, 100%': { boxShadow: '0 0 40px rgba(240, 58, 23, 0.3), 0 0 80px rgba(240, 58, 23, 0.2)' },
-                            '50%': { boxShadow: '0 0 60px rgba(240, 58, 23, 0.5), 0 0 120px rgba(240, 58, 23, 0.3)' },
-                        },
-                    },
-                    borderRadius: {
-                        'lg': '1rem',
-                    }
-                }
-            }
-        }
-    </script>
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        :root {
-            --background: #0a0a0a;
-            --foreground: #fafafa;
-            --primary: #f03a17;
-            --secondary: '#1a1a1a';
-            --muted: '#737373';
-            --border: '#262626';
-            --glass-bg: rgba(20, 20, 20, 0.7);
-            --glass-border: rgba(240, 58, 23, 0.2);
-            --glass-blur: 20px;
-            --overlay-bg: rgba(10, 10, 10, 0.6);
+      /* Reset and Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border: 0;
+        font-family: 'Outfit', sans-serif;
+      }
+
+      :root {
+        --background: 0 10% 4%;
+        --foreground: 0 10% 98%;
+        --card: 0 15% 8%;
+        --card-foreground: 0 10% 98%;
+        --popover: 0 15% 8%;
+        --popover-foreground: 0 10% 98%;
+        --primary: 0 85% 55%;
+        --primary-foreground: 0 10% 98%;
+        --secondary: 0 20% 12%;
+        --secondary-foreground: 0 10% 98%;
+        --muted: 0 15% 12%;
+        --muted-foreground: 0 10% 65%;
+        --accent: 0 85% 55%;
+        --accent-foreground: 0 10% 98%;
+        --border: 0 20% 18%;
+        --input: 0 20% 18%;
+        --ring: 0 85% 55%;
+        --radius: 1rem;
+        
+        /* Custom properties - Crimson Red glow */
+        --glow-primary: 0 0 30px hsl(0 85% 55% / 0.4);
+        --glow-primary-intense: 0 0 60px hsl(0 85% 55% / 0.6);
+        --glass-bg: hsl(0 15% 6% / 0.7);
+        --glass-border: hsl(0 85% 55% / 0.2);
+        --glass-blur: 20px;
+        --overlay-bg: hsl(0 10% 4% / 0.6);
+      }
+
+      body {
+        background: hsl(var(--background));
+        color: hsl(var(--foreground));
+        font-family: 'Outfit', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes pulseGlow {
+        0%, 100% {
+          box-shadow: 
+            0 0 40px hsl(var(--primary) / 0.3),
+            0 0 80px hsl(var(--primary) / 0.2);
+        }
+        50% {
+          box-shadow: 
+            0 0 60px hsl(var(--primary) / 0.5),
+            0 0 120px hsl(var(--primary) / 0.3);
+        }
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Utility Classes */
+      .animate-fade-in-up {
+        animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      .animate-fade-in-up-delay-1 {
+        animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+        opacity: 0;
+      }
+
+      .animate-fade-in-up-delay-2 {
+        animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+        opacity: 0;
+      }
+
+      .animate-fade-in-up-delay-3 {
+        animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.6s forwards;
+        opacity: 0;
+      }
+
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .animate-pulse-glow {
+        animation: pulseGlow 3s ease-in-out infinite;
+      }
+
+      .animate-spin-slow {
+        animation: spin 20s linear infinite;
+      }
+
+      /* Component Styles */
+      .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(var(--glass-blur));
+        -webkit-backdrop-filter: blur(var(--glass-blur));
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glow-primary);
+        border-radius: 1.5rem;
+      }
+
+      .glow-text {
+        text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+      }
+
+      .icon-glow {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background: hsl(var(--secondary) / 0.5);
+      }
+
+      .icon-glow:hover {
+        filter: drop-shadow(0 0 12px hsl(var(--primary) / 0.8));
+        transform: translateY(-3px) scale(1.1);
+        color: hsl(var(--primary));
+      }
+
+      .avatar-glow {
+        box-shadow: 
+          0 0 40px hsl(var(--primary) / 0.3),
+          0 0 80px hsl(var(--primary) / 0.2),
+          inset 0 0 20px hsl(var(--primary) / 0.1);
+        border-radius: 50%;
+        border: 2px solid hsl(var(--primary) / 0.3);
+      }
+
+      .music-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background: var(--glass-bg);
+        backdrop-filter: blur(var(--glass-blur));
+        -webkit-backdrop-filter: blur(var(--glass-blur));
+        border: 1px solid var(--glass-border);
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        z-index: 50;
+      }
+
+      .music-btn:hover {
+        box-shadow: var(--glow-primary-intense);
+        transform: scale(1.1);
+      }
+
+      /* Layout Styles */
+      .main-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .background-container {
+        position: fixed;
+        inset: 0;
+        z-index: -10;
+        overflow: hidden;
+      }
+
+      .youtube-iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1.3);
+        width: 177.78vh;
+        height: 100vh;
+        min-width: 100%;
+        min-height: 56.25vw;
+        pointer-events: none;
+      }
+
+      .overlay-dark {
+        position: absolute;
+        inset: 0;
+        background: var(--overlay-bg);
+      }
+
+      .corner-overlay-bottom-right {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 12rem;
+        height: 6rem;
+        background: linear-gradient(to top left, hsl(var(--background)), hsl(var(--background) / 0.8), transparent);
+      }
+
+      .corner-overlay-top-left {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 12rem;
+        height: 4rem;
+        background: linear-gradient(to bottom right, hsl(var(--background)), hsl(var(--background) / 0.6), transparent);
+      }
+
+      .corner-overlay-top-right {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 8rem;
+        height: 4rem;
+        background: linear-gradient(to bottom left, hsl(var(--background)), hsl(var(--background) / 0.6), transparent);
+      }
+
+      .gradient-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, hsl(var(--background)), hsl(var(--background) / 0.5), transparent);
+        opacity: 0.8;
+      }
+
+      .vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at center, transparent 40%, hsl(var(--background)) 100%);
+      }
+
+      .animated-gradient {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom right, hsl(var(--primary) / 0.05), transparent, hsl(var(--primary) / 0.1));
+        animation: pulse 8s ease-in-out infinite;
+      }
+
+      .noise-texture {
+        position: absolute;
+        inset: 0;
+        opacity: 0.02;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* Profile Card Styles */
+      .profile-card {
+        padding: 2rem;
+        max-width: 28rem;
+        width: 100%;
+        margin: 0 1rem;
+        animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards, float 6s ease-in-out infinite;
+        position: relative;
+        z-index: 10;
+      }
+
+      .avatar-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+
+      .avatar-image {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        overflow: hidden;
+        object-fit: cover;
+      }
+
+      .decorative-ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 1px solid hsl(var(--primary) / 0.2);
+        transform: scale(1.2);
+      }
+
+      .profile-name {
+        font-size: 3rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 0.75rem;
+      }
+
+      .profile-role {
+        color: hsl(var(--primary));
+        text-align: center;
+        font-size: 1rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+      }
+
+      .divider {
+        width: 4rem;
+        height: 1px;
+        background: linear-gradient(to right, transparent, hsl(var(--primary)), transparent);
+        margin: 0 auto 1.5rem;
+      }
+
+      .profile-about {
+        color: hsl(var(--muted-foreground));
+        text-align: center;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+
+      .social-btn {
+        color: hsl(var(--foreground) / 0.8);
+        padding: 0.75rem;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      /* Popup Styles */
+      .popup-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: hsl(var(--background) / 0.8);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .popup-content {
+        padding: 1.5rem;
+        max-width: 24rem;
+        width: 100%;
+        margin: 0 1rem;
+        position: relative;
+        border-radius: 1rem;
+      }
+
+      .popup-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: hsl(var(--muted-foreground));
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .popup-close:hover {
+        color: hsl(var(--foreground));
+      }
+
+      .popup-icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+
+      .popup-icon-circle {
+        padding: 0.75rem;
+        border-radius: 50%;
+        background: hsl(var(--primary) / 0.2);
+      }
+
+      .popup-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .popup-subtitle {
+        color: hsl(var(--muted-foreground));
+        text-align: center;
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+      }
+
+      .phone-display {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        background: hsl(var(--secondary) / 0.5);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .phone-number {
+        font-size: 1.125rem;
+        font-family: monospace;
+        color: hsl(var(--foreground));
+      }
+
+      .copy-btn {
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        background: hsl(var(--primary) / 0.2);
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .copy-btn:hover {
+        background: hsl(var(--primary) / 0.3);
+      }
+
+      .whatsapp-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+        padding: 0.75rem;
+        border-radius: 0.75rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: opacity 0.3s;
+      }
+
+      .whatsapp-btn:hover {
+        opacity: 0.9;
+      }
+
+      .team-member {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: hsl(var(--secondary) / 0.5);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .member-avatar {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background: linear-gradient(to bottom right, hsl(var(--primary) / 0.4), hsl(var(--primary) / 0.2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .member-initial {
+        font-size: 1.125rem;
+        font-weight: bold;
+        color: hsl(var(--primary));
+      }
+
+      .member-info {
+        flex: 1;
+      }
+
+      .member-name {
+        font-weight: 600;
+        color: hsl(var(--foreground));
+      }
+
+      .member-role {
+        font-size: 0.875rem;
+        color: hsl(var(--muted-foreground));
+      }
+
+      .discord-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+        padding: 0.75rem;
+        border-radius: 0.75rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: opacity 0.3s;
+        margin-top: 1.5rem;
+      }
+
+      .discord-btn:hover {
+        opacity: 0.9;
+      }
+
+      /* Credits */
+      .credits {
+        position: fixed;
+        bottom: 1.5rem;
+        left: 1.5rem;
+        font-size: 0.75rem;
+        color: hsl(var(--muted-foreground) / 0.5);
+      }
+
+      /* Responsive */
+      @media (max-width: 640px) {
+        .profile-card {
+          padding: 1.5rem;
         }
         
-        * {
-            border-color: var(--border);
+        .profile-name {
+          font-size: 2.5rem;
         }
         
-        body {
-            background-color: var(--background);
-            color: var(--foreground);
-            font-family: 'Outfit', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+        .avatar-image {
+          width: 8rem;
+          height: 8rem;
         }
         
-        html {
-            scroll-behavior: smooth;
+        .youtube-iframe {
+          transform: translate(-50%, -50%) scale(1.4);
         }
-        
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 0 30px rgba(240, 58, 23, 0.4);
-        }
-        
-        .glow-text {
-            text-shadow: 0 0 20px rgba(240, 58, 23, 0.5);
-        }
-        
-        .icon-glow {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .icon-glow:hover {
-            filter: drop-shadow(0 0 12px rgba(240, 58, 23, 0.8));
-            transform: translateY(-3px) scale(1.1);
-        }
-        
-        .avatar-glow {
-            box-shadow: 0 0 40px rgba(240, 58, 23, 0.3), 0 0 80px rgba(240, 58, 23, 0.2);
-        }
-        
-        .music-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            border-radius: 9999px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--glass-border);
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .music-btn:hover {
-            box-shadow: 0 0 60px rgba(240, 58, 23, 0.6);
-            transform: scale(1.1);
-        }
-        
-        .animate-fade-in-up {
-            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .animate-pulse-glow {
-            animation: pulseGlow 3s ease-in-out infinite;
-        }
-        
-        .animate-spin-slow {
-            animation: spin 20s linear infinite;
-        }
-        
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+      }
     </style>
-</head>
-<body>
-    <main class="min-h-screen flex items-center justify-center overflow-hidden relative">
-        
-        <div id="background" class="fixed inset-0 -z-10 overflow-hidden bg-black">
-            <video 
-                id="bg-video" 
-                class="absolute inset-0 w-full h-full object-cover"
-                autoplay 
-                muted 
-                loop 
-                playsinline>
-                <source src="background.mp4" type="video/mp4">
-            </video>
-            
-            <div class="absolute inset-0 z-0" style="background: var(--overlay-bg)"></div>
-            <div class="absolute bottom-0 right-0 w-48 h-24 bg-gradient-to-tl from-background via-background/80 to-transparent z-0"></div>
-            <div class="absolute top-0 left-0 w-48 h-16 bg-gradient-to-br from-background via-background/60 to-transparent z-0"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-80 z-0"></div>
-            <div class="absolute inset-0 z-0" style="background: radial-gradient(ellipse at center, transparent 40%, var(--background) 100%)"></div>
+  </head>
+
+  <body>
+    <div id="root">
+      <div class="main-container">
+        <!-- Background with YouTube Video -->
+        <div class="background-container">
+          <iframe
+            class="youtube-iframe"
+            src="https://www.youtube-nocookie.com/embed/dZUNQAu1uG8?autoplay=1&mute=1&loop=1&playlist=dZUNQAu1uG8&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&start=0&end=185"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+            title="Background Video"
+          ></iframe>
+          
+          <div class="overlay-dark"></div>
+          <div class="corner-overlay-bottom-right"></div>
+          <div class="corner-overlay-top-left"></div>
+          <div class="corner-overlay-top-right"></div>
+          <div class="gradient-overlay"></div>
+          <div class="vignette"></div>
+          <div class="animated-gradient"></div>
+          <div class="noise-texture"></div>
         </div>
-        
-        <div id="profile-card" class="glass-card rounded-3xl p-8 md:p-12 max-w-md w-full mx-4 animate-fade-in-up animate-float relative z-10">
-            <div class="flex justify-center mb-6">
-                <div class="relative">
-                    <div class="w-32 h-32 md:w-40 md:h-40 rounded-full avatar-glow animate-pulse-glow overflow-hidden border-2 border-primary/30">
-                        <img src="https://i.imgur.com/YYn3Dra.png" alt="Chachuz" class="w-full h-full object-cover">
-                    </div>
-                    <div class="absolute inset-0 rounded-full border border-primary/20 animate-spin-slow" style="transform: scale(1.2)"></div>
-                </div>
+
+        <!-- Profile Card -->
+        <div class="glass-card profile-card">
+          <!-- Avatar -->
+          <div class="avatar-container">
+            <div class="relative">
+              <div class="avatar-glow animate-pulse-glow overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                  alt="Samridh Avatar"
+                  class="avatar-image"
+                />
+              </div>
+              <div class="decorative-ring animate-spin-slow"></div>
             </div>
+          </div>
+
+          <!-- Name -->
+          <h1 class="profile-name glow-text animate-fade-in-up-delay-1">
+            Samridh
+          </h1>
+
+          <!-- Role -->
+          <p class="profile-role animate-fade-in-up-delay-1">
+            Editor • Graphic Designer • Team Leader
+          </p>
+
+          <!-- Divider -->
+          <div class="divider animate-fade-in-up-delay-2"></div>
+
+          <!-- About -->
+          <p class="profile-about animate-fade-in-up-delay-2">
+            A disciplined editor and graphic designer with a vision for excellence. 
+            Leading <span class="text-primary" style="color: hsl(var(--primary)); font-weight: 500;">Team Feliz</span> with 
+            creative direction, high standards, and a commitment to community growth.
+          </p>
+
+          <!-- Social Links -->
+          <div class="social-links animate-fade-in-up-delay-3">
+            <button class="social-btn icon-glow" onclick="window.open('https://www.instagram.com/_samridh_chachu_z_?igsh=MTduaXF6Y3VpYmdscg==', '_blank')" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+              </svg>
+            </button>
             
-            <h1 class="text-4xl md:text-5xl font-bold text-center mb-3 glow-text">Chachuz</h1>
-            <p class="text-primary text-center text-sm tracking-widest uppercase mb-6">Editor • Graphic Designer • Team Leader</p>
+            <button class="social-btn icon-glow" onclick="window.open('https://discord.com/users/theonechachuz', '_blank')" aria-label="Discord">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
             
-            <div class="w-16 h-px bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-6"></div>
+            <button class="social-btn icon-glow" onclick="showPhonePopup()" aria-label="WhatsApp">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </button>
             
-            <p class="text-muted text-center text-sm leading-relaxed mb-8">
-                A disciplined editor and graphic designer with a vision for excellence. Leading <span class="text-primary font-medium">Team Feliz</span> with creative direction and high standards.
-            </p>
-            
-            <div class="flex justify-center gap-6">
-                <button onclick="window.open('https://www.instagram.com/_samridh_chachu_z_', '_blank')" class="icon-glow text-foreground/80 hover:text-primary p-3 rounded-full bg-secondary/50">
-                    <i class="fab fa-instagram text-xl"></i>
-                </button>
-                
-                <button onclick="window.open('https://discord.com/users/theonechachuz', '_blank')" class="icon-glow text-foreground/80 hover:text-primary p-3 rounded-full bg-secondary/50">
-                    <i class="fab fa-discord text-xl"></i>
-                </button>
-                
-                <button onclick="showPhonePopup()" class="icon-glow text-foreground/80 hover:text-primary p-3 rounded-full bg-secondary/50">
-                    <i class="fab fa-whatsapp text-xl"></i>
-                </button>
-                
-                <button onclick="showTeamPopup()" class="icon-glow text-foreground/80 hover:text-primary p-3 rounded-full bg-secondary/50">
-                    <i class="fas fa-users text-xl"></i>
-                </button>
-            </div>
+            <button class="social-btn icon-glow" onclick="showTeamPopup()" aria-label="Team Feliz">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </button>
+          </div>
         </div>
-        
-        <button id="music-btn" onclick="toggleMute()" class="music-btn fixed bottom-6 right-6 z-50" aria-label="Unmute">
-            <i id="music-icon" class="fas fa-volume-mute text-muted"></i>
+
+        <!-- Music Player -->
+        <button class="music-btn" id="musicToggle" aria-label="Toggle mute">
+          <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
         </button>
-        
-        <p class="fixed bottom-6 left-6 text-xs text-muted/50">© 2024 Chachuz</p>
-    </main>
-    
-    <div id="phone-popup" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm" onclick="closePhonePopup()">
-        <div class="glass-card rounded-2xl p-8 max-w-sm w-full mx-4 relative" onclick="event.stopPropagation()">
-            <button onclick="closePhonePopup()" class="absolute top-4 right-4 text-muted hover:text-foreground">
-                <i class="fas fa-times text-lg"></i>
+
+        <!-- Credits -->
+        <p class="credits">
+          © 2024 Samridh
+        </p>
+
+        <!-- Phone Popup (hidden by default) -->
+        <div id="phonePopup" class="popup-overlay" style="display: none;">
+          <div class="glass-card popup-content" onclick="event.stopPropagation()">
+            <button class="popup-close" onclick="hidePhonePopup()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </button>
             
-            <i class="fas fa-phone text-primary text-3xl mx-auto mb-4 block text-center"></i>
-            <h3 class="text-xl font-semibold text-center mb-2">Contact Number</h3>
-            <p class="text-muted text-center text-sm mb-4">WhatsApp Only</p>
-            
-            <div class="flex items-center justify-center gap-3 bg-secondary/50 rounded-xl p-4">
-                <span class="text-lg font-mono" id="phone-number">+91 8089322508</span>
-                <button onclick="copyPhone()" id="copy-btn" class="p-2 rounded-lg bg-primary/20 hover:bg-primary/30">
-                    <i id="copy-icon" class="fas fa-copy text-primary"></i>
-                </button>
+            <div class="popup-icon-container">
+              <div class="popup-icon-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </div>
             </div>
             
-            <a href="https://wa.me/918089322508" target="_blank" class="mt-4 w-full flex items-center justify-center bg-primary text-white py-3 rounded-xl font-medium">
-                Open WhatsApp
+            <h3 class="popup-title">Contact Number</h3>
+            <p class="popup-subtitle">WhatsApp Only</p>
+            
+            <div class="phone-display">
+              <span class="phone-number" id="phoneNumber">+91 8089322508</span>
+              <button class="copy-btn" onclick="copyPhoneNumber()" id="copyBtn">
+                <svg id="copyIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+            
+            <a href="https://wa.me/918089322508" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+              Open WhatsApp
             </a>
+          </div>
         </div>
-    </div>
-    
-    <div id="team-popup" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm" onclick="closeTeamPopup()">
-        <div class="glass-card rounded-2xl p-8 max-w-sm w-full mx-4 relative" onclick="event.stopPropagation()">
-            <button onclick="closeTeamPopup()" class="absolute top-4 right-4 text-muted hover:text-foreground">
-                <i class="fas fa-times text-lg"></i>
+
+        <!-- Team Popup (hidden by default) -->
+        <div id="teamPopup" class="popup-overlay" style="display: none;">
+          <div class="glass-card popup-content" onclick="event.stopPropagation()">
+            <button class="popup-close" onclick="hideTeamPopup()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </button>
             
-            <i class="fas fa-users text-primary text-3xl mx-auto mb-4 block text-center"></i>
-            <h3 class="text-xl font-semibold text-center mb-2 glow-text">Team Feliz</h3>
-            <p class="text-muted text-center text-sm mb-6">Founders</p>
+            <div class="popup-icon-container">
+              <div class="popup-icon-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+            </div>
+            
+            <h3 class="popup-title glow-text">Team Feliz</h3>
+            <p class="popup-subtitle">Founders</p>
             
             <div class="space-y-3">
-                <div class="flex items-center gap-4 bg-secondary/50 rounded-xl p-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary/40 to-primary/20 flex items-center justify-center">
-                        <span class="text-lg font-bold text-primary">S</span>
-                    </div>
-                    <div>
-                        <p class="font-semibold">Fz_Smooth</p>
-                        <p class="text-sm text-muted">Co-Founder</p>
-                    </div>
+              <div class="team-member">
+                <div class="member-avatar">
+                  <span class="member-initial">S</span>
                 </div>
-                
-                <div class="flex items-center gap-4 bg-secondary/50 rounded-xl p-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary/40 to-primary/20 flex items-center justify-center">
-                        <span class="text-lg font-bold text-primary">A</span>
-                    </div>
-                    <div>
-                        <p class="font-semibold">Fz_Axe</p>
-                        <p class="text-sm text-muted">Co-Founder</p>
-                    </div>
+                <div class="member-info">
+                  <p class="member-name">Fz_Smooth</p>
+                  <p class="member-role">Co-Founder</p>
                 </div>
+              </div>
+              
+              <div class="team-member">
+                <div class="member-avatar">
+                  <span class="member-initial">A</span>
+                </div>
+                <div class="member-info">
+                  <p class="member-name">Fz_Axe</p>
+                  <p class="member-role">Co-Founder</p>
+                </div>
+              </div>
             </div>
             
-            <a href="https://discord.gg/V4g8GTvjrD" target="_blank" class="mt-6 w-full flex items-center justify-center bg-primary text-white py-3 rounded-xl font-medium">
-                Join Discord Server
+            <a href="https://discord.gg/V4g8GTvjrD" target="_blank" rel="noopener noreferrer" class="discord-btn">
+              Join Discord Server
             </a>
+          </div>
         </div>
+      </div>
     </div>
-    
-    <script>
-        // --- UPDATED VIDEO & MUTE CONTROL ---
-        const videoElement = document.getElementById('bg-video');
-        const musicIcon = document.getElementById('music-icon');
-        const musicBtn = document.getElementById('music-btn');
-        let isMuted = true;
-        
-        // 1. Trimming Logic:
-        // Automatically loops back to start at 58.5 seconds
-        videoElement.addEventListener('timeupdate', function() {
-            if (this.currentTime >= 58.5) { 
-                this.currentTime = 0;
-                this.play();
-            }
-        });
 
-        // 2. Mute Toggle Logic
-        function toggleMute() {
-            isMuted = !isMuted;
-            videoElement.muted = isMuted;
-            
-            // Ensure volume is up when unmuted
-            if (!isMuted) {
-                videoElement.volume = 1.0;
-            }
-            
-            // Update Icon
-            if (isMuted) {
-                musicIcon.className = 'fas fa-volume-mute text-muted';
-                musicBtn.setAttribute('aria-label', 'Unmute');
-            } else {
-                musicIcon.className = 'fas fa-volume-up text-primary';
-                musicBtn.setAttribute('aria-label', 'Mute');
-            }
-        }
+    <script>
+      // State management
+      let isMuted = true;
+      let isPhoneCopied = false;
+
+      // DOM Elements
+      const musicToggle = document.getElementById('musicToggle');
+      const muteIcon = document.getElementById('muteIcon');
+      const phonePopup = document.getElementById('phonePopup');
+      const teamPopup = document.getElementById('teamPopup');
+      const copyBtn = document.getElementById('copyBtn');
+      const copyIcon = document.getElementById('copyIcon');
+      const phoneNumber = document.getElementById('phoneNumber');
+      
+      // YouTube iframe reference
+      let youtubeIframe = null;
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', () => {
+        youtubeIframe = document.querySelector('.youtube-iframe');
         
-        // Popup functions
-        function showPhonePopup() {
-            document.getElementById('phone-popup').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
+        // Set initial mute state
+        updateMuteState();
         
-        function closePhonePopup() {
-            document.getElementById('phone-popup').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
+        // Add click handlers
+        musicToggle.addEventListener('click', toggleMute);
         
-        function showTeamPopup() {
-            document.getElementById('team-popup').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeTeamPopup() {
-            document.getElementById('team-popup').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-        
-        // Copy phone number
-        async function copyPhone() {
-            const phoneNumber = document.getElementById('phone-number').textContent;
-            const copyIcon = document.getElementById('copy-icon');
-            
-            try {
-                await navigator.clipboard.writeText(phoneNumber);
-                
-                // Show success
-                copyIcon.className = 'fas fa-check text-primary';
-                setTimeout(() => {
-                    copyIcon.className = 'fas fa-copy text-primary';
-                }, 2000);
-            } catch (err) {
-                console.error('Failed to copy: ', err);
-            }
-        }
-        
-        // Close popups with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closePhonePopup();
-                closeTeamPopup();
-            }
+        // Close popups when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!phonePopup.contains(e.target) && phonePopup.style.display === 'flex') {
+            hidePhonePopup();
+          }
+          if (!teamPopup.contains(e.target) && teamPopup.style.display === 'flex') {
+            hideTeamPopup();
+          }
         });
+      });
+
+      // Toggle mute/unmute
+      function toggleMute() {
+        isMuted = !isMuted;
+        updateMuteState();
         
-        // Initialize animations
-        window.addEventListener('load', () => {
-            const profileCard = document.getElementById('profile-card');
-            profileCard.classList.add('animate-fade-in-up');
-            profileCard.classList.add('animate-float');
-        });
+        // Update YouTube iframe src with new mute parameter
+        if (youtubeIframe) {
+          const currentSrc = youtubeIframe.src;
+          const newSrc = currentSrc.replace(/mute=\d/, `mute=${isMuted ? 1 : 0}`);
+          youtubeIframe.src = newSrc;
+        }
+      }
+
+      // Update UI based on mute state
+      function updateMuteState() {
+        if (isMuted) {
+          muteIcon.innerHTML = `
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          `;
+          musicToggle.style.color = 'hsl(var(--muted-foreground))';
+        } else {
+          muteIcon.innerHTML = `
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          `;
+          musicToggle.style.color = 'hsl(var(--primary))';
+        }
+      }
+
+      // Show phone popup
+      function showPhonePopup() {
+        phonePopup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+
+      // Hide phone popup
+      function hidePhonePopup() {
+        phonePopup.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+
+      // Show team popup
+      function showTeamPopup() {
+        teamPopup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+
+      // Hide team popup
+      function hideTeamPopup() {
+        teamPopup.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+
+      // Copy phone number to clipboard
+      async function copyPhoneNumber() {
+        try {
+          await navigator.clipboard.writeText(phoneNumber.textContent);
+          
+          // Visual feedback
+          copyIcon.innerHTML = `
+            <polyline points="20 6 9 17 4 12"></polyline>
+          `;
+          copyBtn.style.backgroundColor = 'hsl(var(--primary) / 0.4)';
+          
+          // Reset after 2 seconds
+          setTimeout(() => {
+            copyIcon.innerHTML = `
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            `;
+            copyBtn.style.backgroundColor = 'hsl(var(--primary) / 0.2)';
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+          alert('Failed to copy phone number. Please try again.');
+        }
+      }
     </script>
-</body>
+  </body>
 </html>
