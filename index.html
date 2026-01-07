@@ -157,25 +157,22 @@
 <body>
     <main class="min-h-screen flex items-center justify-center overflow-hidden relative">
         
-        <div id="background" class="fixed inset-0 -z-10 overflow-hidden">
-            <div class="absolute inset-0 pointer-events-none">
-                <video 
-                    id="bg-video" 
-                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover"
-                    autoplay 
-                    muted 
-                    loop 
-                    playsinline>
-                    <source src="background.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
+        <div id="background" class="fixed inset-0 -z-10 overflow-hidden bg-black">
+            <video 
+                id="bg-video" 
+                class="absolute inset-0 w-full h-full object-cover"
+                autoplay 
+                muted 
+                loop 
+                playsinline>
+                <source src="background.mp4" type="video/mp4">
+            </video>
             
-            <div class="absolute inset-0" style="background: var(--overlay-bg)"></div>
-            <div class="absolute bottom-0 right-0 w-48 h-24 bg-gradient-to-tl from-background via-background/80 to-transparent"></div>
-            <div class="absolute top-0 left-0 w-48 h-16 bg-gradient-to-br from-background via-background/60 to-transparent"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-80"></div>
-            <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, transparent 40%, var(--background) 100%)"></div>
+            <div class="absolute inset-0 z-0" style="background: var(--overlay-bg)"></div>
+            <div class="absolute bottom-0 right-0 w-48 h-24 bg-gradient-to-tl from-background via-background/80 to-transparent z-0"></div>
+            <div class="absolute top-0 left-0 w-48 h-16 bg-gradient-to-br from-background via-background/60 to-transparent z-0"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-80 z-0"></div>
+            <div class="absolute inset-0 z-0" style="background: radial-gradient(ellipse at center, transparent 40%, var(--background) 100%)"></div>
         </div>
         
         <div id="profile-card" class="glass-card rounded-3xl p-8 md:p-12 max-w-md w-full mx-4 animate-fade-in-up animate-float relative z-10">
@@ -292,10 +289,9 @@
         let isMuted = true;
         
         // 1. Trimming Logic:
-        // The watermark/outro appears around 59s. We create a manual loop
-        // via JS to reset the video to 0s once it hits 58.5s.
+        // Automatically loops back to start at 58.5 seconds
         videoElement.addEventListener('timeupdate', function() {
-            if (this.currentTime >= 58.5) { // Trim point at 58.5 seconds
+            if (this.currentTime >= 58.5) { 
                 this.currentTime = 0;
                 this.play();
             }
@@ -304,7 +300,12 @@
         // 2. Mute Toggle Logic
         function toggleMute() {
             isMuted = !isMuted;
-            videoElement.muted = isMuted; // Native HTML5 video mute property
+            videoElement.muted = isMuted;
+            
+            // Ensure volume is up when unmuted
+            if (!isMuted) {
+                videoElement.volume = 1.0;
+            }
             
             // Update Icon
             if (isMuted) {
