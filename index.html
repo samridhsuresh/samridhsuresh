@@ -828,4 +828,112 @@
     <script>
         // State variables
         let isMuted = true;
-       
+        let phonePopupVisible = false;
+        let teamPopupVisible = false;
+        
+        // Get DOM elements
+        const musicBtn = document.getElementById('musicBtn');
+        const volumeIcon = document.getElementById('volumeIcon');
+        const phonePopup = document.getElementById('phonePopup');
+        const teamPopup = document.getElementById('teamPopup');
+        const phoneNumberElement = document.getElementById('phoneNumber');
+        const copyIcon = document.getElementById('copyIcon');
+        
+        // Toggle mute function
+        function toggleMute() {
+            isMuted = !isMuted;
+            
+            // Update the YouTube iframe
+            const iframe = document.querySelector('.video-iframe');
+            const currentSrc = iframe.src;
+            
+            // Update mute parameter in the iframe URL
+            if (isMuted) {
+                iframe.src = currentSrc.replace('mute=0', 'mute=1');
+                volumeIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                       <line x1="23" y1="9" x2="17" y2="15"></line>
+                                       <line x1="17" y1="9" x2="23" y2="15"></line>`;
+                musicBtn.querySelector('svg').style.color = 'hsl(var(--foreground) / 0.8)';
+            } else {
+                iframe.src = currentSrc.replace('mute=1', 'mute=0');
+                volumeIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                       <path d="M19.074 4.927a10 10 0 0 1 0 14.146M15 9a5 5 0 0 1 0 6"></path>`;
+                musicBtn.querySelector('svg').style.color = 'hsl(var(--primary))';
+            }
+        }
+        
+        // Show/hide phone popup
+        function showPhonePopup() {
+            phonePopup.style.display = 'flex';
+            phonePopupVisible = true;
+        }
+        
+        function hidePhonePopup() {
+            phonePopup.style.display = 'none';
+            phonePopupVisible = false;
+        }
+        
+        // Show/hide team popup
+        function showTeamPopup() {
+            teamPopup.style.display = 'flex';
+            teamPopupVisible = true;
+        }
+        
+        function hideTeamPopup() {
+            teamPopup.style.display = 'none';
+            teamPopupVisible = false;
+        }
+        
+        // Copy phone number to clipboard
+        async function copyPhoneNumber() {
+            const phoneNumber = phoneNumberElement.textContent;
+            
+            try {
+                await navigator.clipboard.writeText(phoneNumber);
+                
+                // Change icon to checkmark temporarily
+                copyIcon.innerHTML = `<polyline points="20 6 9 17 4 12"></polyline>`;
+                
+                // Revert back after 2 seconds
+                setTimeout(() => {
+                    copyIcon.innerHTML = `<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>`;
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+            }
+        }
+        
+        // Close popups when clicking outside
+        document.addEventListener('click', function(event) {
+            if (phonePopupVisible && !phonePopup.contains(event.target)) {
+                hidePhonePopup();
+            }
+            
+            if (teamPopupVisible && !teamPopup.contains(event.target)) {
+                hideTeamPopup();
+            }
+        });
+        
+        // Close popups with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                if (phonePopupVisible) {
+                    hidePhonePopup();
+                }
+                if (teamPopupVisible) {
+                    hideTeamPopup();
+                }
+            }
+        });
+        
+        // Initialize tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial volume icon
+            volumeIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                   <line x1="23" y1="9" x2="17" y2="15"></line>
+                                   <line x1="17" y1="9" x2="23" y2="15"></line>`;
+        });
+    </script>
+</body>
+</html>
