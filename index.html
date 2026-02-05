@@ -10,29 +10,25 @@
     <meta property="og:title" content="Chachuz | Editor • Designer • Leader">
     <meta property="og:description" content="Creative director and leader of Team Feliz. Excellence in editing and graphic design.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://i.imgur.com/YYn3Dra.png">
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://i.imgur.com/YYn3Dra.png">
+    <meta name="twitter:site" content="@Lovable">
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* CSS Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
         }
-        
+
         :root {
             --background: 225 30% 6%;
             --foreground: 0 10% 98%;
-            --card: 225 26% 10%;
-            --card-foreground: 0 10% 98%;
-            --popover: 225 26% 10%;
-            --popover-foreground: 0 10% 98%;
             --primary: 195 95% 55%;
             --primary-foreground: 0 10% 98%;
             --secondary: 225 22% 14%;
@@ -41,487 +37,105 @@
             --muted-foreground: 0 10% 60%;
             --accent: 315 85% 60%;
             --accent-foreground: 0 10% 98%;
-            --destructive: 0 84.2% 60.2%;
-            --destructive-foreground: 210 40% 98%;
             --border: 225 20% 20%;
-            --input: 225 20% 20%;
             --ring: 195 95% 55%;
             --radius: 1rem;
+            
             --glow-primary: 0 0 30px hsl(195 95% 55% / 0.35);
             --glow-primary-intense: 0 0 55px hsl(195 95% 55% / 0.55);
             --glass-bg: hsl(225 30% 8% / 0.75);
             --glass-border: hsl(195 95% 55% / 0.22);
             --glass-blur: 24px;
+            
             --overlay-bg: hsl(225 30% 6% / 0.55);
-            --video-tint: radial-gradient(1200px circle at 20% 20%, hsl(195 95% 55% / 0.14), transparent 55%),
-                radial-gradient(900px circle at 80% 30%, hsl(315 85% 60% / 0.10), transparent 55%);
             --video-filter: saturate(1.2) contrast(1.12) brightness(0.9) hue-rotate(-6deg);
         }
-        
+
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: hsl(var(--background));
+            background: hsl(var(--background));
             color: hsl(var(--foreground));
             min-height: 100vh;
             overflow-x: hidden;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-        
-        /* Main Layout */
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .video-background iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 177.78vh;
+            height: 100vh;
+            min-width: 100%;
+            min-height: 56.25vw;
+            transform: translate(-50%, -50%) scale(1.3);
+            filter: var(--video-filter);
+            pointer-events: none;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay-bg);
+            z-index: -1;
+        }
+
+        .video-tint {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(1200px circle at 20% 20%, hsl(195 95% 55% / 0.14), transparent 55%),
+                       radial-gradient(900px circle at 80% 30%, hsl(315 85% 60% / 0.10), transparent 55%);
+            z-index: -1;
+        }
+
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 40%, hsl(var(--background)) 100%);
+            z-index: -1;
+        }
+
         .main-container {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            padding: 20px;
             position: relative;
         }
-        
-        /* Background Styles */
-        .background-container {
-            position: fixed;
-            inset: 0;
-            z-index: -10;
-            overflow: hidden;
-        }
-        
-        .background-overlay {
-            position: absolute;
-            inset: 0;
-            background: var(--overlay-bg);
-        }
-        
-        .background-tint {
-            position: absolute;
-            inset: 0;
-            background: var(--video-tint);
-        }
-        
-        .background-gradients {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-        }
-        
-        .gradient-1 {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 12rem;
-            height: 6rem;
-            background: linear-gradient(to top left, hsl(var(--background)), hsl(var(--background) / 0.8), transparent);
-        }
-        
-        .gradient-2 {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 12rem;
-            height: 4rem;
-            background: linear-gradient(to bottom right, hsl(var(--background)), hsl(var(--background) / 0.6), transparent);
-        }
-        
-        .gradient-3 {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 8rem;
-            height: 4rem;
-            background: linear-gradient(to bottom left, hsl(var(--background)), hsl(var(--background) / 0.6), transparent);
-        }
-        
-        .gradient-4 {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, hsl(var(--background)), hsl(var(--background) / 0.5), transparent);
-            opacity: 0.8;
-        }
-        
-        .gradient-5 {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at center, transparent 40%, hsl(var(--background)) 100%);
-        }
-        
-        .gradient-6 {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom right, hsl(var(--primary) / 0.05), transparent, hsl(var(--primary) / 0.1));
-            animation: pulseGlow 8s ease-in-out infinite;
-        }
-        
-        .noise-overlay {
-            position: absolute;
-            inset: 0;
-            opacity: 0.02;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-        }
-        
-        /* YouTube Video Background */
-        .video-container {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        
-        .video-iframe {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(1.3);
-            width: 177.78vh;
-            height: 100vh;
-            min-width: 100%;
-            min-height: 56.25vw;
-            filter: var(--video-filter);
-            border: none;
-        }
-        
-        /* Profile Card */
+
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(var(--glass-blur));
             -webkit-backdrop-filter: blur(var(--glass-blur));
             border: 1px solid var(--glass-border);
             box-shadow: var(--glow-primary);
-            border-radius: 1.5rem;
-            padding: 2rem;
-            max-width: 28rem;
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 480px;
             width: 100%;
-            margin: 0 1rem;
             position: relative;
             z-index: 10;
-            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards, float 6s ease-in-out infinite;
+            animation: fadeInUp 1s ease-out, float 6s ease-in-out infinite;
         }
-        
-        .profile-header {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .avatar-container {
-            position: relative;
-        }
-        
-        .avatar-glow {
-            width: 10rem;
-            height: 10rem;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid hsl(var(--primary) / 0.4);
-            position: relative;
-            z-index: 10;
-            box-shadow: 0 0 40px hsl(var(--primary) / 0.3), 0 0 80px hsl(var(--primary) / 0.2), inset 0 0 20px hsl(var(--primary) / 0.1);
-        }
-        
-        .avatar-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .profile-name {
-            font-size: 3rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 0.75rem;
-            text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
-            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
-            opacity: 0;
-        }
-        
-        .profile-title {
-            color: hsl(var(--primary));
-            text-align: center;
-            font-size: 1rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
-            opacity: 0;
-        }
-        
-        .divider {
-            width: 4rem;
-            height: 1px;
-            background: linear-gradient(to right, transparent, hsl(var(--primary)), transparent);
-            margin: 0 auto 1.5rem;
-            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
-            opacity: 0;
-        }
-        
-        .profile-description {
-            color: hsl(var(--muted-foreground));
-            text-align: center;
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
-            opacity: 0;
-        }
-        
-        .profile-description span {
-            color: hsl(var(--primary));
-            font-weight: 500;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.6s forwards;
-            opacity: 0;
-        }
-        
-        .social-icon {
-            color: hsl(var(--foreground) / 0.8);
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .social-icon:hover {
-            color: hsl(var(--primary));
-            filter: drop-shadow(0 0 12px hsl(var(--primary) / 0.8));
-            transform: translateY(-3px) scale(1.1);
-        }
-        
-        .social-icon svg {
-            width: 1.75rem;
-            height: 1.75rem;
-        }
-        
-        /* Music Player */
-        .music-btn {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            z-index: 20;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 3rem;
-            height: 3rem;
-            border-radius: 50%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glow-primary);
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .music-btn:hover {
-            box-shadow: var(--glow-primary-intense);
-            transform: scale(1.1);
-        }
-        
-        .music-btn svg {
-            width: 1.25rem;
-            height: 1.25rem;
-        }
-        
-        /* Copyright */
-        .copyright {
-            position: fixed;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            font-size: 0.75rem;
-            color: hsl(var(--muted-foreground) / 0.5);
-        }
-        
-        /* Modal Overlay */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: hsl(var(--background) / 0.8);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        /* Modal Content */
-        .modal-content {
-            background: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--glass-border);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            max-width: 24rem;
-            width: 100%;
-            margin: 0 1rem;
-            position: relative;
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            color: hsl(var(--muted-foreground));
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        
-        .modal-close:hover {
-            color: hsl(var(--foreground));
-        }
-        
-        .modal-close svg {
-            width: 1.25rem;
-            height: 1.25rem;
-        }
-        
-        .modal-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-        
-        .modal-icon-circle {
-            padding: 0.75rem;
-            border-radius: 50%;
-            background-color: hsl(var(--primary) / 0.2);
-        }
-        
-        .modal-icon-circle svg {
-            width: 2rem;
-            height: 2rem;
-            color: hsl(var(--primary));
-        }
-        
-        .modal-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .modal-subtitle {
-            color: hsl(var(--muted-foreground));
-            text-align: center;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-        }
-        
-        .phone-display {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            background-color: hsl(var(--secondary) / 0.5);
-            border-radius: 0.75rem;
-            padding: 1rem;
-        }
-        
-        .phone-number {
-            font-size: 1.125rem;
-            font-family: monospace;
-            color: hsl(var(--foreground));
-        }
-        
-        .copy-btn {
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-            background-color: hsl(var(--primary) / 0.2);
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .copy-btn:hover {
-            background-color: hsl(var(--primary) / 0.3);
-        }
-        
-        .copy-btn svg {
-            width: 1rem;
-            height: 1rem;
-            color: hsl(var(--primary));
-        }
-        
-        .action-btn {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            background-color: hsl(var(--primary));
-            color: hsl(var(--primary-foreground));
-            padding: 0.75rem;
-            border-radius: 0.75rem;
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: opacity 0.2s;
-            margin-top: 1rem;
-            text-decoration: none;
-        }
-        
-        .action-btn:hover {
-            opacity: 0.9;
-        }
-        
-        .team-member {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background-color: hsl(var(--secondary) / 0.5);
-            border-radius: 0.75rem;
-            padding: 1rem;
-        }
-        
-        .team-member-avatar {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 50%;
-            background: linear-gradient(to bottom right, hsl(var(--primary) / 0.4), hsl(var(--primary) / 0.2));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .team-member-avatar span {
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: hsl(var(--primary));
-        }
-        
-        .team-member-info p:first-child {
-            font-weight: 600;
-            color: hsl(var(--foreground));
-        }
-        
-        .team-member-info p:last-child {
-            font-size: 0.875rem;
-            color: hsl(var(--muted-foreground));
-        }
-        
-        .team-members {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        /* Animations */
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -532,7 +146,7 @@
                 transform: translateY(0);
             }
         }
-        
+
         @keyframes float {
             0%, 100% {
                 transform: translateY(0);
@@ -541,399 +155,633 @@
                 transform: translateY(-10px);
             }
         }
-        
-        @keyframes pulseGlow {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.7;
-            }
-        }
-        
-        /* Tooltip */
-        .tooltip-container {
+
+        .profile-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            overflow: hidden;
+            border: 2px solid hsl(var(--primary) / 0.4);
+            box-shadow: 0 0 40px hsl(var(--primary) / 0.3),
+                        0 0 80px hsl(var(--primary) / 0.2),
+                        inset 0 0 20px hsl(var(--primary) / 0.1);
             position: relative;
-            display: inline-block;
         }
-        
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .title {
+            color: hsl(var(--primary));
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 24px;
+            padding: 10px 24px;
+            border-radius: 12px;
+            background: hsl(var(--primary) / 0.2);
+            border: 1px solid hsl(var(--primary) / 0.4);
+            color: hsl(var(--primary));
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            background: hsl(var(--primary) / 0.3);
+            border-color: hsl(var(--primary) / 0.6);
+            box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+        }
+
+        .divider {
+            width: 64px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, hsl(var(--primary)), transparent);
+            margin: 0 auto 24px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .description {
+            color: hsl(var(--muted-foreground));
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            font-size: 1rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .highlight {
+            color: hsl(var(--primary));
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .social-button {
+            background: transparent;
+            border: none;
+            color: hsl(var(--foreground) / 0.8);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .social-button:hover {
+            color: hsl(var(--primary));
+            filter: drop-shadow(0 0 12px hsl(var(--primary) / 0.8));
+            transform: translateY(-3px) scale(1.1);
+        }
+
         .tooltip {
             position: absolute;
-            bottom: 100%;
+            bottom: -30px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--glass-bg);
             backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
             border: 1px solid var(--glass-border);
-            border-radius: 0.5rem;
-            padding: 0.5rem 0.75rem;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
             white-space: nowrap;
-            z-index: 100;
-            margin-bottom: 0.5rem;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.2s, visibility 0.2s;
+            transition: all 0.3s ease;
         }
-        
-        .tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 0.4rem;
-            border-style: solid;
-            border-color: var(--glass-border) transparent transparent transparent;
-        }
-        
-        .tooltip-container:hover .tooltip {
+
+        .social-button:hover .tooltip {
             opacity: 1;
             visibility: visible;
         }
-        
-        /* Responsive */
+
+        .music-button {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glow-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .music-button:hover {
+            box-shadow: var(--glow-primary-intense);
+            transform: scale(1.1);
+        }
+
+        .music-button i {
+            font-size: 1.2rem;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .music-button.active i {
+            color: hsl(var(--primary));
+        }
+
+        .credits {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            font-size: 0.7rem;
+            color: hsl(var(--muted-foreground) / 0.5);
+            z-index: 100;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: hsl(var(--background) / 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 400px;
+            width: 90%;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: hsl(var(--primary) / 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .modal-icon i {
+            font-size: 1.5rem;
+            color: hsl(var(--primary));
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .modal-subtitle {
+            color: hsl(var(--muted-foreground));
+            text-align: center;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .phone-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: hsl(var(--secondary) / 0.5);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .phone-number {
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: hsl(var(--foreground));
+        }
+
+        .copy-button {
+            background: hsl(var(--primary) / 0.2);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: hsl(var(--primary) / 0.3);
+        }
+
+        .copy-button i {
+            color: hsl(var(--primary));
+            font-size: 1rem;
+        }
+
+        .whatsapp-button, .discord-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            background: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            text-align: center;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 16px;
+        }
+
+        .whatsapp-button:hover, .discord-button:hover {
+            opacity: 0.9;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: transparent;
+            border: none;
+            color: hsl(var(--muted-foreground));
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-button:hover {
+            color: hsl(var(--foreground));
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: hsl(var(--secondary) / 0.5);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .member-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom right, hsl(var(--primary) / 0.4), hsl(var(--primary) / 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: hsl(var(--primary));
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-weight: 600;
+            color: hsl(var(--foreground));
+        }
+
+        .member-role {
+            font-size: 0.9rem;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .music-sync-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 24px;
+            border: 2px solid hsl(var(--primary) / 0.3);
+            animation: ringPulse 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes ringPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+                border-color: hsl(var(--primary) / 0.3);
+            }
+            50% {
+                transform: scale(1.015);
+                opacity: 0.8;
+                border-color: hsl(var(--primary) / 0.5);
+            }
+        }
+
         @media (max-width: 640px) {
             .glass-card {
-                padding: 1.5rem;
+                padding: 24px;
             }
             
-            .profile-name {
+            .name {
                 font-size: 2.5rem;
             }
             
-            .avatar-glow {
-                width: 8rem;
-                height: 8rem;
-            }
-            
-            .social-links {
-                gap: 1rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .profile-name {
-                font-size: 2rem;
-            }
-            
-            .profile-title {
-                font-size: 0.875rem;
-            }
-            
-            .avatar-glow {
-                width: 7rem;
-                height: 7rem;
+            .profile-image {
+                width: 140px;
+                height: 140px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <iframe 
+            src="https://www.youtube-nocookie.com/embed/p1J3LIXN7AI?autoplay=1&mute=1&loop=1&playlist=p1J3LIXN7AI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&start=0&end=217"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+        </iframe>
+    </div>
+    
+    <div class="video-overlay"></div>
+    <div class="video-tint"></div>
+    <div class="vignette"></div>
+    
+    <!-- Main Content -->
     <div class="main-container">
-        <!-- Background Video -->
-        <div class="background-container">
-            <div class="video-container">
-                <iframe 
-                    class="video-iframe"
-                    src="https://www.youtube-nocookie.com/embed/p1J3LIXN7AI?autoplay=1&mute=1&loop=1&playlist=p1J3LIXN7AI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&start=0&end=217"
-                    allow="autoplay; encrypted-media"
-                    allowfullscreen
-                    title="Background Video">
-                </iframe>
-            </div>
-            
-            <div class="background-overlay"></div>
-            <div class="background-tint"></div>
-            
-            <div class="background-gradients">
-                <div class="gradient-1"></div>
-                <div class="gradient-2"></div>
-                <div class="gradient-3"></div>
-                <div class="gradient-4"></div>
-                <div class="gradient-5"></div>
-                <div class="gradient-6"></div>
-                <div class="noise-overlay"></div>
-            </div>
-        </div>
-        
-        <!-- Profile Card -->
         <div class="glass-card">
-            <div class="profile-header">
-                <div class="avatar-container">
-                    <div class="avatar-glow">
-                        <img src="https://i.imgur.com/YYn3Dra.png" alt="Samridh Avatar" class="avatar-image">
-                    </div>
-                </div>
+            <div class="music-sync-ring"></div>
+            
+            <!-- Profile Image -->
+            <div class="profile-image">
+                <img src="https://i.imgur.com/YYn3Dra.png" alt="Samridh Avatar">
             </div>
             
-            <h1 class="profile-name">Samridh</h1>
-            <p class="profile-title">Editor • Graphic Designer • Team Leader</p>
+            <!-- Name -->
+            <h1 class="name">Samridh</h1>
             
+            <!-- Title -->
+            <p class="title">Editor • Graphic Designer • Team Leader</p>
+            
+            <!-- Dive Deeper Button -->
+            <a href="https://felizweb.yzz.me/" target="_blank" class="cta-button">
+                Dive Deeper
+            </a>
+            
+            <!-- Divider -->
             <div class="divider"></div>
             
-            <p class="profile-description">
+            <!-- Description -->
+            <p class="description">
                 A disciplined editor and graphic designer with a vision for excellence. 
-                Leading <span>Team Feliz</span> with creative direction, high standards, 
-                and a commitment to community growth.
+                Leading <span class="highlight">Team Feliz</span> with 
+                creative direction, high standards, and a commitment to community growth.
             </p>
             
+            <!-- Social Links -->
             <div class="social-links">
-                <div class="tooltip-container">
-                    <button class="social-icon" onclick="window.open('https://www.instagram.com/_samridh_chachu_z_?igsh=MTduaXF6Y3VpYmdscg==', '_blank')" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                        </svg>
-                    </button>
-                    <div class="tooltip">Instagram</div>
-                </div>
+                <!-- Instagram -->
+                <button class="social-button" onclick="window.open('https://www.instagram.com/_samridh_chachu_z_?igsh=MTduaXF6Y3VpYmdscg==', '_blank')">
+                    <i class="fab fa-instagram"></i>
+                    <span class="tooltip">Instagram</span>
+                </button>
                 
-                <div class="tooltip-container">
-                    <button class="social-icon" onclick="window.open('https://discord.com/users/theonechachuz', '_blank')" aria-label="Discord">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg>
-                    </button>
-                    <div class="tooltip">Discord</div>
-                </div>
+                <!-- Discord -->
+                <button class="social-button" onclick="window.open('https://discord.com/users/theonechachuz', '_blank')">
+                    <i class="fab fa-discord"></i>
+                    <span class="tooltip">Discord</span>
+                </button>
                 
-                <div class="tooltip-container">
-                    <button class="social-icon" onclick="showPhonePopup()" aria-label="WhatsApp">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                        </svg>
-                    </button>
-                    <div class="tooltip">WhatsApp</div>
-                </div>
+                <!-- WhatsApp -->
+                <button class="social-button" onclick="showPhoneModal()">
+                    <i class="fab fa-whatsapp"></i>
+                    <span class="tooltip">WhatsApp</span>
+                </button>
                 
-                <div class="tooltip-container">
-                    <button class="social-icon" onclick="showTeamPopup()" aria-label="Team Feliz">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                    </button>
-                    <div class="tooltip">Team Feliz</div>
-                </div>
+                <!-- Team Feliz -->
+                <button class="social-button" onclick="showTeamModal()">
+                    <i class="fas fa-users"></i>
+                    <span class="tooltip">Team Feliz</span>
+                </button>
             </div>
         </div>
         
-        <!-- Music Player -->
-        <button class="music-btn" id="musicBtn" onclick="toggleMute()" aria-label="Toggle Mute">
-            <svg id="volumeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                <line x1="23" y1="9" x2="17" y2="15"></line>
-                <line x1="17" y1="9" x2="23" y2="15"></line>
-            </svg>
-        </button>
-        
-        <!-- Copyright -->
-        <p class="copyright">© 2024 Samridh</p>
-        
-        <!-- Phone Popup -->
-        <div id="phonePopup" class="modal-overlay" style="display: none;">
-            <div class="modal-content" onclick="event.stopPropagation()">
-                <button class="modal-close" onclick="hidePhonePopup()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-                
-                <div class="modal-icon">
-                    <div class="modal-icon-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                        </svg>
-                    </div>
-                </div>
-                
-                <h3 class="modal-title">Contact Number</h3>
-                <p class="modal-subtitle">WhatsApp Only</p>
-                
-                <div class="phone-display">
-                    <span class="phone-number" id="phoneNumber">+91 8089322508</span>
-                    <button class="copy-btn" onclick="copyPhoneNumber()">
-                        <svg id="copyIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                        </svg>
-                    </button>
-                </div>
-                
-                <a href="https://wa.me/918089322508" target="_blank" rel="noopener noreferrer" class="action-btn">
-                    Open WhatsApp
-                </a>
-            </div>
+        <!-- Music Button -->
+        <div class="music-button" id="musicButton" onclick="toggleMute()">
+            <i class="fas fa-volume-mute"></i>
         </div>
         
-        <!-- Team Popup -->
-        <div id="teamPopup" class="modal-overlay" style="display: none;">
-            <div class="modal-content" onclick="event.stopPropagation()">
-                <button class="modal-close" onclick="hideTeamPopup()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-                
+        <!-- Credits -->
+        <div class="credits">© 2024 Samridh</div>
+    </div>
+    
+    <!-- Phone Modal -->
+    <div id="phoneModal" class="modal-overlay" style="display: none;">
+        <div class="modal">
+            <button class="close-button" onclick="hidePhoneModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-header">
                 <div class="modal-icon">
-                    <div class="modal-icon-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                    </div>
+                    <i class="fab fa-whatsapp"></i>
                 </div>
-                
-                <h3 class="modal-title" style="text-shadow: 0 0 20px hsl(var(--primary) / 0.5);">Team Feliz</h3>
-                <p class="modal-subtitle">Founders</p>
-                
-                <div class="team-members">
-                    <div class="team-member">
-                        <div class="team-member-avatar">
-                            <span>S</span>
-                        </div>
-                        <div class="team-member-info">
-                            <p>Fz_Smooth</p>
-                            <p>Co-Founder</p>
-                        </div>
-                    </div>
-                    
-                    <div class="team-member">
-                        <div class="team-member-avatar">
-                            <span>A</span>
-                        </div>
-                        <div class="team-member-info">
-                            <p>Fz_Axe</p>
-                            <p>Co-Founder</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <a href="https://discord.gg/V4g8GTvjrD" target="_blank" rel="noopener noreferrer" class="action-btn">
-                    Join Discord Server
-                </a>
             </div>
+            
+            <h3 class="modal-title">Contact Number</h3>
+            <p class="modal-subtitle">WhatsApp Only</p>
+            
+            <div class="phone-display">
+                <span class="phone-number" id="phoneNumber">+91 8089322508</span>
+                <button class="copy-button" onclick="copyPhoneNumber()">
+                    <i class="fas fa-copy" id="copyIcon"></i>
+                </button>
+            </div>
+            
+            <a href="https://wa.me/918089322508" target="_blank" class="whatsapp-button">
+                Open WhatsApp
+            </a>
+        </div>
+    </div>
+    
+    <!-- Team Modal -->
+    <div id="teamModal" class="modal-overlay" style="display: none;">
+        <div class="modal">
+            <button class="close-button" onclick="hideTeamModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+            
+            <h3 class="modal-title">Team Feliz</h3>
+            <p class="modal-subtitle">Founders</p>
+            
+            <div class="team-member">
+                <div class="member-avatar">S</div>
+                <div class="member-info">
+                    <div class="member-name">Fz_Smooth</div>
+                    <div class="member-role">Co-Founder</div>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="member-avatar">A</div>
+                <div class="member-info">
+                    <div class="member-name">Fz_Axe</div>
+                    <div class="member-role">Co-Founder</div>
+                </div>
+            </div>
+            
+            <a href="https://discord.gg/V4g8GTvjrD" target="_blank" class="discord-button">
+                Join Discord Server
+            </a>
         </div>
     </div>
     
     <script>
-        // State variables
+        // Music mute/unmute functionality
         let isMuted = true;
-        let phonePopupVisible = false;
-        let teamPopupVisible = false;
+        const musicButton = document.getElementById('musicButton');
         
-        // Get DOM elements
-        const musicBtn = document.getElementById('musicBtn');
-        const volumeIcon = document.getElementById('volumeIcon');
-        const phonePopup = document.getElementById('phonePopup');
-        const teamPopup = document.getElementById('teamPopup');
-        const phoneNumberElement = document.getElementById('phoneNumber');
-        const copyIcon = document.getElementById('copyIcon');
-        
-        // Toggle mute function
         function toggleMute() {
             isMuted = !isMuted;
+            const iframe = document.querySelector('.video-background iframe');
             
-            // Update the YouTube iframe
-            const iframe = document.querySelector('.video-iframe');
-            const currentSrc = iframe.src;
-            
-            // Update mute parameter in the iframe URL
             if (isMuted) {
-                iframe.src = currentSrc.replace('mute=0', 'mute=1');
-                volumeIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                                       <line x1="23" y1="9" x2="17" y2="15"></line>
-                                       <line x1="17" y1="9" x2="23" y2="15"></line>`;
-                musicBtn.querySelector('svg').style.color = 'hsl(var(--foreground) / 0.8)';
+                musicButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                musicButton.classList.remove('active');
             } else {
-                iframe.src = currentSrc.replace('mute=1', 'mute=0');
-                volumeIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                                       <path d="M19.074 4.927a10 10 0 0 1 0 14.146M15 9a5 5 0 0 1 0 6"></path>`;
-                musicBtn.querySelector('svg').style.color = 'hsl(var(--primary))';
+                musicButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+                musicButton.classList.add('active');
             }
-        }
-        
-        // Show/hide phone popup
-        function showPhonePopup() {
-            phonePopup.style.display = 'flex';
-            phonePopupVisible = true;
-        }
-        
-        function hidePhonePopup() {
-            phonePopup.style.display = 'none';
-            phonePopupVisible = false;
-        }
-        
-        // Show/hide team popup
-        function showTeamPopup() {
-            teamPopup.style.display = 'flex';
-            teamPopupVisible = true;
-        }
-        
-        function hideTeamPopup() {
-            teamPopup.style.display = 'none';
-            teamPopupVisible = false;
-        }
-        
-        // Copy phone number to clipboard
-        async function copyPhoneNumber() {
-            const phoneNumber = phoneNumberElement.textContent;
             
-            try {
-                await navigator.clipboard.writeText(phoneNumber);
+            // Update YouTube iframe src to toggle mute
+            const currentSrc = iframe.src;
+            const newSrc = currentSrc.replace(/mute=\d/, `mute=${isMuted ? 1 : 0}`);
+            iframe.src = newSrc;
+        }
+        
+        // Modal functions
+        function showPhoneModal() {
+            document.getElementById('phoneModal').style.display = 'flex';
+        }
+        
+        function hidePhoneModal() {
+            document.getElementById('phoneModal').style.display = 'none';
+        }
+        
+        function showTeamModal() {
+            document.getElementById('teamModal').style.display = 'flex';
+        }
+        
+        function hideTeamModal() {
+            document.getElementById('teamModal').style.display = 'none';
+        }
+        
+        // Copy phone number function
+        function copyPhoneNumber() {
+            const phoneNumber = document.getElementById('phoneNumber').textContent;
+            const copyIcon = document.getElementById('copyIcon');
+            
+            navigator.clipboard.writeText(phoneNumber).then(() => {
+                // Change icon to checkmark
+                copyIcon.className = 'fas fa-check';
                 
-                // Change icon to checkmark temporarily
-                copyIcon.innerHTML = `<polyline points="20 6 9 17 4 12"></polyline>`;
-                
-                // Revert back after 2 seconds
+                // Change back to copy icon after 2 seconds
                 setTimeout(() => {
-                    copyIcon.innerHTML = `<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>`;
+                    copyIcon.className = 'fas fa-copy';
                 }, 2000);
-            } catch (err) {
-                console.error('Failed to copy: ', err);
-            }
+            });
         }
         
-        // Close popups when clicking outside
-        document.addEventListener('click', function(event) {
-            if (phonePopupVisible && !phonePopup.contains(event.target)) {
-                hidePhonePopup();
+        // Close modals when clicking outside
+        window.addEventListener('click', (event) => {
+            const phoneModal = document.getElementById('phoneModal');
+            const teamModal = document.getElementById('teamModal');
+            
+            if (event.target === phoneModal) {
+                hidePhoneModal();
             }
             
-            if (teamPopupVisible && !teamPopup.contains(event.target)) {
-                hideTeamPopup();
+            if (event.target === teamModal) {
+                hideTeamModal();
             }
         });
         
-        // Close popups with Escape key
-        document.addEventListener('keydown', function(event) {
+        // Add keyboard support for closing modals
+        document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
-                if (phonePopupVisible) {
-                    hidePhonePopup();
-                }
-                if (teamPopupVisible) {
-                    hideTeamPopup();
-                }
+                hidePhoneModal();
+                hideTeamModal();
             }
         });
         
-        // Initialize tooltips
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set initial volume icon
-            volumeIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                                   <line x1="23" y1="9" x2="17" y2="15"></line>
-                                   <line x1="17" y1="9" x2="23" y2="15"></line>`;
-        });
+        // Initialize with muted video
+        window.onload = function() {
+            musicButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        };
     </script>
 </body>
 </html>
